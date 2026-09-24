@@ -2100,7 +2100,7 @@ textarea.w-input, textarea.w-select {
 
 .w-checkbox-input--inputType-custom.w--redirected-checked {
   background-color: #3898ec;
-  background-image: url("https://d3e54v103j8qbb.cloudfront.net/static/custom-checkbox-checkmark.589d534424.svg");
+  background-image: url("custom-checkbox-checkmark.589d534424.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -2842,7 +2842,7 @@ figcaption {
   aspect-ratio: auto;
   -webkit-text-fill-color: inherit;
   object-fit: fill;
-  background-image: url("https://d3e54v103j8qbb.cloudfront.net/img/background-image.svg");
+  background-image: url("background-image.svg");
   background-position: 50% 100%;
   background-size: cover;
   background-clip: border-box;
