@@ -184,7 +184,9 @@
     var main = document.createElementNS(SVG_NS, "circle");
     main.setAttribute("cx", CENTER.cx);
     main.setAttribute("cy", CENTER.cy);
-    main.setAttribute("r", MAIN_RADIUS);
+    // Un filo più piccolo dell'immagine: con lo stesso raggio l'antialiasing
+    // del bordo lasciava intravedere un sottile anello blu attorno alla foto.
+    main.setAttribute("r", MAIN_RADIUS - 1.5);
     main.setAttribute("fill", "#070f75");
     canvas.appendChild(main);
 

@@ -679,3 +679,19 @@ body.ion-matrice-hover {
 .chisiamo-link-menu.is-active .chisiamo-menu {
   font-weight: 700;
 }
+
+/* Mobile: tasti "Scopri di più" della home un po' più piccoli (stesse
+   misure del tasto indietro delle pagine progetto). */
+@media screen and (max-width: 767px) {
+  .button-home-section:not(.project-back) .button-home.home-section {
+    font-size: 16px;
+    padding: 4px 16px;
+  }
+  .button-home-section:not(.project-back) .button-home-logo {
+    width: 30px;
+    height: 30px;
+  }
+  .button-home-section:not(.project-back) .freccia-svg-color-1 {
+    width: 16px;
+  }
+}
