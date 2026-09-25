@@ -19,7 +19,8 @@ html {
      tappo bianco (radial-gradient) nell'angolo della casella trasparente;
    - angolo RIENTRANTE (3 immagine + 1 bianca) o incrocio a scacchiera:
      si arrotonda l'angolo della casella bianca.
-   Solo il primo mosaico, scoping via l'id univoco Webflow del contenitore. */
+   Scoping via l'id univoco Webflow del contenitore (il secondo mosaico,
+   "Risolviamo la complessità", ha le sue regole più sotto). */
 #w-node-_4f246626-819a-0685-a45b-e11794393b90-421ade00 > .home-white-box:nth-child(3) { border-radius: 0 0 8px 0; }
 #w-node-_4f246626-819a-0685-a45b-e11794393b90-421ade00 > .home-white-box:nth-child(6) { border-radius: 0 0 0 8px; }
 #w-node-_4f246626-819a-0685-a45b-e11794393b90-421ade00 > .home-white-box:nth-child(9) { border-radius: 0 0 8px 0; }
@@ -55,6 +56,36 @@ html {
 #w-node-_4f246626-819a-0685-a45b-e11794393b90-421ade00 > .home-color-box::before { content: ""; position: absolute; inset: 0; pointer-events: none; transition: opacity 0.4s ease; }
 .image-shape-container:hover > #w-node-_4f246626-819a-0685-a45b-e11794393b90-421ade00 > .home-color-box::before { opacity: 0; }
 #w-node-_4f246626-819a-0685-a45b-e11794393b90-421ade00 + .home-image-background { border-radius: 8px; }
+
+/* Stesso smusso per il mosaico "Risolviamo la complessità..." (secondo
+   home-chi-siamo, disposizione delle caselle diversa): regole generate con lo
+   stesso metodo vertice per vertice, stesso comportamento all'hover. */
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(4) { border-radius: 0 0 0 8px; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(10) { border-radius: 0 8px 8px 0; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(13) { border-radius: 0 0 8px 8px; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(15) { border-radius: 8px 0 0 8px; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(19) { border-radius: 8px 8px 8px 8px; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(22) { border-radius: 8px 8px 8px 8px; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(26) { border-radius: 0 8px 8px 0; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(28) { border-radius: 8px 8px 0 0; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(31) { border-radius: 8px 0 0 8px; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-white-box:nth-child(37) { border-radius: 0 8px 0 0; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(2)::before { background: radial-gradient(circle at 100% 100%, transparent 7.5px, var(--white) 8px) left top / 8px 8px no-repeat, radial-gradient(circle at 100% 0, transparent 7.5px, var(--white) 8px) left bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(3)::before { background: radial-gradient(circle at 0 100%, transparent 7.5px, var(--white) 8px) right top / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(6)::before { background: radial-gradient(circle at 100% 100%, transparent 7.5px, var(--white) 8px) left top / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(7)::before { background: radial-gradient(circle at 0 100%, transparent 7.5px, var(--white) 8px) right top / 8px 8px no-repeat, radial-gradient(circle at 0 0, transparent 7.5px, var(--white) 8px) right bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(12)::before { background: radial-gradient(circle at 0 100%, transparent 7.5px, var(--white) 8px) right top / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(17)::before { background: radial-gradient(circle at 100% 100%, transparent 7.5px, var(--white) 8px) left top / 8px 8px no-repeat, radial-gradient(circle at 100% 0, transparent 7.5px, var(--white) 8px) left bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(24)::before { background: radial-gradient(circle at 0 100%, transparent 7.5px, var(--white) 8px) right top / 8px 8px no-repeat, radial-gradient(circle at 0 0, transparent 7.5px, var(--white) 8px) right bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(29)::before { background: radial-gradient(circle at 100% 0, transparent 7.5px, var(--white) 8px) left bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(34)::before { background: radial-gradient(circle at 100% 100%, transparent 7.5px, var(--white) 8px) left top / 8px 8px no-repeat, radial-gradient(circle at 100% 0, transparent 7.5px, var(--white) 8px) left bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(35)::before { background: radial-gradient(circle at 0 0, transparent 7.5px, var(--white) 8px) right bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(38)::before { background: radial-gradient(circle at 100% 0, transparent 7.5px, var(--white) 8px) left bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box:nth-child(39)::before { background: radial-gradient(circle at 0 100%, transparent 7.5px, var(--white) 8px) right top / 8px 8px no-repeat, radial-gradient(circle at 0 0, transparent 7.5px, var(--white) 8px) right bottom / 8px 8px no-repeat; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box { position: relative; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box::before { content: ""; position: absolute; inset: 0; pointer-events: none; transition: opacity 0.4s ease; }
+.image-shape-container:hover > #w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 > .home-color-box::before { opacity: 0; }
+#w-node-_69999f56-b050-d7f1-666c-2b67e62818a5-421ade00 + .home-image-background { border-radius: 8px; }
 
 
 /* Effetto vetro sui bottoni "Scopri di più" — il 3° tentativo (bordo
@@ -638,4 +669,13 @@ body.ion-matrice-hover {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Chi siamo: menu laterale delle sezioni (vedi chi-siamo-menu.js).
+   Nell'export ha z-index: -1 e resta sotto al contenuto, quindi non riceve i clic. */
+.chisiamo-left-menu {
+  z-index: 1;
+}
+.chisiamo-link-menu.is-active .chisiamo-menu {
+  font-weight: 700;
 }
