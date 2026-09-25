@@ -728,3 +728,84 @@
 
   document.addEventListener("mousemove", update);
 })();
+
+/* Card "ION Culture and Heritage" su touch: lo sfondo (render "matrice"
+   9000x5062, background-size: cover) su telefono è molto più largo dello
+   schermo e se ne vede solo la fascia centrale. Trascinando in orizzontale
+   con un dito l'immagine scorre di lato (fino ai suoi bordi, con un po' di
+   inerzia al rilascio); in verticale non succede niente di speciale: la
+   pagina scorre come sempre, perché l'immagine è già alta al 100%.
+
+   Come per la lente sopra, la card non riceve eventi (z-index: -1 sulla
+   sezione nel CSS Webflow): ascoltiamo i tocchi su document e controlliamo
+   a mano se partono dentro il rettangolo della card. */
+(function () {
+  var container = document.querySelector(".home-matrice-div");
+  if (!container || !("ontouchstart" in window)) return;
+
+  var IMAGE_W = 9000;
+  var IMAGE_H = 5062;
+  var LOCK = 8;         // px prima di decidere se il gesto è orizzontale o verticale
+  var FRICTION = 0.94;  // inerzia al rilascio (per frame)
+
+  var offset = null;    // background-position-x in px (null = centrata, come da CSS)
+  var start = null, mode = null, lastX = 0, lastT = 0, velocity = 0, raf = 0;
+
+  function limits() {
+    var rect = container.getBoundingClientRect();
+    var scale = Math.max(rect.width / IMAGE_W, rect.height / IMAGE_H);
+    return { min: Math.min(0, rect.width - IMAGE_W * scale), rect: rect };
+  }
+
+  function apply(x) {
+    var min = limits().min;
+    offset = Math.min(0, Math.max(min, x));
+    container.style.backgroundPosition = offset + "px 50%";
+    return offset;
+  }
+
+  function current() {
+    return offset === null ? limits().min / 2 : offset;
+  }
+
+  document.addEventListener("touchstart", function (e) {
+    if (e.touches.length !== 1) { start = null; return; }
+    var t = e.touches[0], r = container.getBoundingClientRect();
+    if (t.clientX < r.left || t.clientX > r.right || t.clientY < r.top || t.clientY > r.bottom) { start = null; return; }
+    cancelAnimationFrame(raf);
+    start = { x: t.clientX, y: t.clientY, offset: current() };
+    mode = null; lastX = t.clientX; lastT = e.timeStamp; velocity = 0;
+  }, { passive: true });
+
+  document.addEventListener("touchmove", function (e) {
+    if (!start || e.touches.length !== 1) return;
+    var t = e.touches[0], dx = t.clientX - start.x, dy = t.clientY - start.y;
+    if (!mode) {
+      if (Math.abs(dx) < LOCK && Math.abs(dy) < LOCK) return;
+      mode = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+    if (mode !== "x") return;
+    e.preventDefault(); // gesto orizzontale sulla card: niente scroll della pagina
+    apply(start.offset + dx);
+    var dt = e.timeStamp - lastT;
+    if (dt > 0) velocity = (t.clientX - lastX) / dt * 16; // px per frame
+    lastX = t.clientX; lastT = e.timeStamp;
+  }, { passive: false });
+
+  function end() {
+    if (mode === "x" && Math.abs(velocity) > 0.5) {
+      (function glide() {
+        velocity *= FRICTION;
+        var before = offset;
+        if (apply(offset + velocity) === before || Math.abs(velocity) < 0.3) return;
+        raf = requestAnimationFrame(glide);
+      })();
+    }
+    start = null; mode = null;
+  }
+  document.addEventListener("touchend", end);
+  document.addEventListener("touchcancel", end);
+
+  // Al cambio di orientamento/dimensione la posizione resta nei limiti.
+  window.addEventListener("resize", function () { if (offset !== null) apply(offset); });
+})();
