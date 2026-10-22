@@ -673,6 +673,13 @@ body.ion-matrice-hover {
 
 /* Chi siamo: menu laterale delle sezioni (vedi chi-siamo-menu.js).
    Nell'export ha z-index: -1 e resta sotto al contenuto, quindi non riceve i clic. */
+.cise-title {
+  margin-top: 96px;
+}
+.cise-button {
+  margin-top: 24px;
+}
+
 .chisiamo-left-menu {
   z-index: 1;
 }
