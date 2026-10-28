@@ -93,11 +93,19 @@
   // I file si chiamano ad es. "G07_2-1_C_GENOVA_A-FOTO_001.jpg": il codice deve
   // essere preceduto da "-" o "_" e seguito da "_" o "-", così "1_V_NOVARA" non
   // coincide con "101_V_NOVARA".
-  function fileDellaCabina(files, codice) {
-    if (!codice) return [];
-    var re = new RegExp("(^|[-_ ])" + escRegExp(codice) + "([-_ .]|$)", "i");
+  // La colonna QUANTITA (A, AB, ABC, ABCD) è il suffisso usato nei nomi:
+  // "..._C_GENOVA_A-FOTO" e "..._C_GENOVA_AB-FOTO" sono due cabine diverse.
+  function fileDellaCabina(files, c) {
+    if (!c.codice) return [];
+    var base = "(^|[-_ ])" + escRegExp(c.codice);
+    if (c.quantita) {
+      var esatto = new RegExp(base + "_" + escRegExp(c.quantita) + "([-_ .]|$)", "i");
+      var trovati = files.filter(function (f) { return esatto.test(f.name.trim()); });
+      if (trovati.length || !c.indirizzoUnico) return trovati;
+    }
+    var largo = new RegExp(base + "([-_ .]|$)", "i");
     return files.filter(function (f) {
-      return re.test(f.name.trim());
+      return largo.test(f.name.trim());
     });
   }
 
@@ -195,6 +203,8 @@
       raw: r,
       indirizzo: txt(r.Indirizzo),
       codice: codiceDaIndirizzo(r.Indirizzo),
+      quantita: up(r.QUANTITA),
+      indirizzoUnico: true, // aggiornato dopo la lettura di tutte le righe
       dataRilievo: txt(r["Data rilievo"]),
       note: txt(r.Note) || "Nessuna nota inserita",
       struttura: up(r.Struttura),
@@ -291,7 +301,10 @@
         position: google.maps.ControlPosition.TOP_LEFT
       },
       streetViewControl: true,
-      fullscreenControl: true
+      fullscreenControl: true,
+      rotateControl: false,
+      headingInteractionEnabled: false,
+      tiltInteractionEnabled: false
     });
     infoWindow = new google.maps.InfoWindow({ maxWidth: Math.min(640, window.innerWidth - 40) });
     infoWindow.addListener("closeclick", rimuoviExtraMarker);
@@ -305,6 +318,9 @@
     datiPromise
       .then(function (dati) {
         rows = dati.map(normalizza);
+        var conteggio = {};
+        rows.forEach(function (c) { conteggio[c.codice] = (conteggio[c.codice] || 0) + 1; });
+        rows.forEach(function (c) { c.indirizzoUnico = conteggio[c.codice] === 1; });
         disegnaMarker();
         aggiornaContatori();
         disegnaTabella();
@@ -460,7 +476,7 @@
 
     // Dossier PDF
     var $dossier = $(info).find(".pdf_dossier");
-    var pdf = fileDellaCabina(pdfFiles, c.codice);
+    var pdf = fileDellaCabina(pdfFiles, c);
     if (!pdf.length) $dossier.html("<p>Nessun PDF caricato</p>");
     pdf.forEach(function (f) {
       var $c = $('<div class="cont_pdf"></div>');
@@ -476,7 +492,7 @@
 
     // Foto: miniature leggere, ingrandimento con lightbox
     var $foto = $(info).find(".foto_rilievo");
-    var foto = fileDellaCabina(fotoFiles, c.codice).sort(function (a, b) {
+    var foto = fileDellaCabina(fotoFiles, c).sort(function (a, b) {
       return a.name.localeCompare(b.name);
     });
     if (!foto.length) $foto.html("<p>Nessuna foto caricata</p>");
