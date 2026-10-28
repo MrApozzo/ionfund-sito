@@ -607,7 +607,6 @@
 
   // ------------------------------------------------------- INTERFACCIA
   $(function () {
-    $("#map").addClass("loading");
 
     // Menu a fisarmonica dei filtri
     $("#filtra_marker")

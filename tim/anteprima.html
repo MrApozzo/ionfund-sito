@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js" defer></script>
     <script src="lightbox/js/lightbox.js" defer></script>
-    <script src="mappa_js/mappa.js?v=2" defer></script>
+    <script src="mappa_js/mappa.js?v=3" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-3GdcIXAiUPELD68-RLT2ZknnswkT9o8&libraries=places,marker&loading=async&callback=initMap&v=weekly&language=it&region=IT" defer></script>
 </head>
 <body>
@@ -131,7 +131,7 @@
         </header>
 
         <div id="map_wrap">
-            <div id="map"></div>
+            <div id="map" class="loading"></div>
             <p id="map_status" hidden></p>
         </div>
 
