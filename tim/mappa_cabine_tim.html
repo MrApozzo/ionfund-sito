@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- Meta per non salvare la Cache -->
+        <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="pragma" content="no-cache">
+        <meta http-equiv="expires" content="0">
+    
+        <link rel="icon" type="image/png" href="img/pin-red.png">
+        <link href="css/reset.css" rel="stylesheet">
+        <link href="css/stile.css" rel="stylesheet">
+        <link href="lightbox/css/lightbox.css" rel="stylesheet">
+        <link href="jquery_ui/jquery-ui.css" rel="stylesheet">
+    
+        <title>Rilievi cabine Milano</title>
+    
+        <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
+        
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+       
+        <!-- Google  Api -->
+        <script src="https://apis.google.com/js/api.js"></script>
+       
+        <!-- SheetsJs -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    
+        <!-- carico google maps API con la librearia places-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWFw5MzllMwcLSj9ovAwnU0XxsoEW6snA&libraries=places,marker&callback=initMap&v=weekly" defer></script>
+    
+        <script src="lightbox/js/lightbox.js"></script>
+    
+    
+    </head>
+    <body>
+        <div id="aside">
+            <div id="loghi_head">
+                <img id="logo_tim" src="img/logo_tim.png" alt="logo_tim-jc" />
+                <img id="logo_uv" src="img/logo_uv.png" alt="logo_tim" />
+            </div>
+            <div id="filtra_marker">
+                <div id="filtra_avanzamento">
+                    <h2>Filtra Avanzamento</h2>
+                    <div>
+                        <span id="filtra_tutti" class="active">Tutti</span>
+                        <span id="filtra_assente">Assenti</span>
+                        <span id="filtra_non_rilevato">Non rilevati</span>
+                        <span id="filtra_rilevato">Rilevati</span>
+                        <span id="filtra_stato_fatto">Stato di fatto</span>
+                        <span id="filtra_stato_progetto">Stato di progetto</span>
+                    </div>
+                </div>
+                <div id="filtra_spostamento">
+                    <h2>Filtra Spostamento</h2>
+                    <div>
+                        <span id="filtra_spostamento_tutti" class="active">Tutti</span>
+                        <span id="filtra_spostamento_non_processata">Non Processate</span>
+                        <span id="filtra_spostamento_fissa">Fisse</span>
+                        <span id="filtra_spostamento_spostata">Spostate</span>
+                        <span id="filtra_spostamento_delocalizzata">Delocalizzate</span>
+                    </div>
+                </div>
+                <div id="filtra_tranche_invio">
+                    <h2>Filtra Tranche Invio</h2>
+                    <div>
+                        <span id="filtra_invio_tutti" class="active">Tutti</span>
+                        <span id="filtra_invio_1">Invio 1</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Manutenzione ordinaria</h2>
+                    <div>
+                        <span>Gestione cicli sopralluoghi</span>
+                        <span>Monitoraggio</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Manutenzione straordinaria</h2>
+                    <div>
+                        <span>Emergenze e anomalie</span>
+                        <span>Atti vandalici</span>
+                    </div>
+                </div>
+            </div>
+            <div id="cont_controlli">
+                <span id="show_table">Tabella riassuntiva</span>
+                <div id="show_deloc">
+                    <h2>Posizioni</h2>
+                    <div class="active">Iniziali</div>
+                    <div>Selezionate</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="testa">
+                <h1>Mappa Cabine TIM <strong>Milano</strong></h1>
+                <div id="interfaccia">
+                    <div id="cont_avanzamento">
+                        <h2>Stato avanzamento totale</h2>
+                        <div id="choose_count">
+                            <span id="count-perc">%</span>
+                            <span id="count-num" class="active">N°</span>
+                        </div>
+                
+                        <div id="count-cont">
+                            <div id="count-assente"></div>
+                            <div id="count-non_rilevato"></div>
+                            <div id="count-rilevato"></div>
+                            <div id="count-stato_fatto"></div>
+                            <div id="count-stato_progetto"></div>
+                            <div id="count-pratica_inviata"></div>
+                        </div>
+                    </div>
+                    <div id="legenda">
+                        <h2>Legenda</h2>
+                        <ul>
+                            <li class="assente">Cabina assente</li>
+                            <li class="non_rilevato">Non rilevato</li>
+                            <li class="rilevato">Rilevato</li>
+                            <li class="stato_fatto">Dossier Stato di Fatto</li>
+                            <li class="stato_progetto">Dossier Stato di Progetto</li>
+                        </ul>
+                        <ul>
+                            <li class="non_processate">Non processate</li>
+                            <li class="fisse">Fisse</li>
+                            <li class="spostate">Spostate</li>
+                            <li class="delocalizzate">Delocalizzate</li>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+        
+        
+        <div id="pdf_viewer"></div>
+        <div id="table-container"></div>
+        
+    
+    
+
+    <!-- il codice sotto carica un file xlsx in locale e lo converte in json - funziona NON CANCELLAREEE -->
+    <script src="mappa_js/mappa_google-ionfund-min.js"></script>
+
+</body>
+<!-- 1725 -->
+</html>
