@@ -27,8 +27,12 @@
         <!-- SheetsJs -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     
-        <!-- carico google maps API con la librearia places-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWFw5MzllMwcLSj9ovAwnU0XxsoEW6snA&libraries=places,marker&callback=initMap&v=weekly" defer></script>
+        <!-- Mappa: Leaflet + OpenStreetMap al posto di Google Maps (vedi mappa_js/gmaps-leaflet-shim.js).
+             Google Maps non si carica più perché sul progetto Google Cloud non è attiva la fatturazione.
+             Per tornare a Google Maps, rimettere:
+             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWFw5MzllMwcLSj9ovAwnU0XxsoEW6snA&libraries=places,marker&callback=initMap&v=weekly" defer></script> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     
         <script src="lightbox/js/lightbox.js"></script>
     
@@ -143,6 +147,7 @@
 
     <!-- il codice sotto carica un file xlsx in locale e lo converte in json - funziona NON CANCELLAREEE -->
     <script src="mappa_js/mappa_google-ionfund-min.js"></script>
+    <script src="mappa_js/gmaps-leaflet-shim.js"></script>
 
 </body>
 <!-- 1725 -->
